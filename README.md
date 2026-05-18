@@ -58,6 +58,17 @@ The app connects to PostgreSQL with these default values:
 
 Override them with environment variables if your local setup is different.
 
+## Render production setup
+
+For Render, set the `DATABASE_URL` environment variable on your web service instead of hardcoding credentials in the codebase.
+
+- `DATABASE_URL=<your Render PostgreSQL connection string>`
+- `NODE_ENV=production`
+
+This app now prefers `DATABASE_URL` automatically and falls back to the local Docker values only when `DATABASE_URL` is missing.
+
+If Render requires SSL for your database connection, the app now enables SSL automatically for `DATABASE_URL` connections. If you ever need to turn that off for a non-Render URL, set `PGSSLMODE=disable`.
+
 ## Getting started
 
 1. Start PostgreSQL with Docker Compose.
