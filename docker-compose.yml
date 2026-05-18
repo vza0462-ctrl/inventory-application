@@ -1,0 +1,15 @@
+services:
+  postgres_db:
+    image: postgres:18
+    container_name: my_postgres_container_18
+    environment:
+      POSTGRES_USER: thata # Tùy chọn: đổi tên user mặc định
+      POSTGRES_PASSWORD: mypassword@ # Bắt buộc: mật khẩu truy cập
+      POSTGRES_DB: inventory # Tùy chọn: tự động tạo database lúc khởi chạy
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+
+volumes:
+  postgres_data:

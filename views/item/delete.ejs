@@ -1,0 +1,35 @@
+<%- include("../partials/head") %>
+
+<section class="section-heading">
+  <div>
+    <p class="eyebrow">Delete item</p>
+    <h1><%= item.itemname %></h1>
+  </div>
+</section>
+
+<section class="panel form-stack">
+  <p><%= item.description %></p>
+  <dl class="meta-list">
+    <div>
+      <dt>SKU</dt>
+      <dd><%= item.sku %></dd>
+    </div>
+    <div>
+      <dt>Category</dt>
+      <dd><%= item.category_name %></dd>
+    </div>
+    <div>
+      <dt>Owner</dt>
+      <dd><%= item.username %></dd>
+    </div>
+  </dl>
+
+  <form action="/items/<%= item.id %>/delete" method="post">
+    <div class="inline-actions">
+      <button class="button button-danger" type="submit">Delete item</button>
+      <a class="button" href="/items/<%= item.id %>">Cancel</a>
+    </div>
+  </form>
+</section>
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,54 @@
+<%- include("../partials/head") %>
+
+<section class="section-heading">
+  <div>
+    <p class="eyebrow">Category detail</p>
+    <h1><%= category.name %></h1>
+    <p class="lede"><%= category.description %></p>
+  </div>
+  <div class="inline-actions">
+    <a class="button" href="/categories/<%= category.id %>/edit">Edit</a>
+    <a class="button button-danger" href="/categories/<%= category.id %>/delete">Delete</a>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Assigned products</p>
+      <h2>Items in this category</h2>
+    </div>
+    <a class="button button-primary" href="/items/new">New item</a>
+  </div>
+
+  <% if (items.length === 0) { %>
+    <p class="empty-state">No items are assigned to this category yet.</p>
+  <% } else { %>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>SKU</th>
+            <th>Owner</th>
+            <th>Qty</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% items.forEach((item) => { %>
+            <tr>
+              <td><a href="/items/<%= item.id %>"><%= item.itemname %></a></td>
+              <td><%= item.sku %></td>
+              <td><%= item.username %></td>
+              <td><%= item.quantity %></td>
+              <td><%= formatCurrency(item.price) %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</section>
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,131 @@
+<%- include("../partials/head") %>
+
+<section class="section-heading">
+  <div>
+    <p class="eyebrow">Item form</p>
+    <h1><%= title %></h1>
+  </div>
+</section>
+
+<%- include("../partials/messages") %>
+
+<form class="panel form-stack" action="<%= actionPath %>" method="post">
+  <div class="grid grid-two">
+    <label class="field">
+      <span>Item name</span>
+      <input
+        class="<%= errorsByField.itemname ? 'input-error' : '' %>"
+        name="itemname"
+        type="text"
+        value="<%= item.itemname %>"
+        maxlength="255"
+        required
+      >
+      <% if (errorsByField.itemname) { %><small class="field-error"><%= errorsByField.itemname %></small><% } %>
+    </label>
+
+    <label class="field">
+      <span>SKU</span>
+      <input
+        class="<%= errorsByField.sku ? 'input-error' : '' %>"
+        name="sku"
+        type="text"
+        value="<%= item.sku %>"
+        maxlength="40"
+        required
+      >
+      <% if (errorsByField.sku) { %><small class="field-error"><%= errorsByField.sku %></small><% } %>
+    </label>
+  </div>
+
+  <label class="field">
+    <span>Description</span>
+    <textarea
+      class="<%= errorsByField.description ? 'input-error' : '' %>"
+      name="description"
+      rows="5"
+      maxlength="1000"
+      required
+    ><%= item.description %></textarea>
+    <% if (errorsByField.description) { %><small class="field-error"><%= errorsByField.description %></small><% } %>
+  </label>
+
+  <div class="grid grid-two">
+    <label class="field">
+      <span>Price</span>
+      <input
+        class="<%= errorsByField.price ? 'input-error' : '' %>"
+        name="price"
+        type="number"
+        min="0"
+        step="0.01"
+        value="<%= item.price %>"
+        required
+      >
+      <% if (errorsByField.price) { %><small class="field-error"><%= errorsByField.price %></small><% } %>
+    </label>
+
+    <label class="field">
+      <span>Quantity</span>
+      <input
+        class="<%= errorsByField.quantity ? 'input-error' : '' %>"
+        name="quantity"
+        type="number"
+        min="0"
+        step="1"
+        value="<%= item.quantity %>"
+        required
+      >
+      <% if (errorsByField.quantity) { %><small class="field-error"><%= errorsByField.quantity %></small><% } %>
+    </label>
+  </div>
+
+  <div class="grid grid-two">
+    <label class="field">
+      <span>Category</span>
+      <select
+        class="<%= errorsByField.category_id ? 'input-error' : '' %>"
+        name="category_id"
+        required
+      >
+        <option value="">Select a category</option>
+        <% categories.forEach((category) => { %>
+          <option
+            value="<%= category.id %>"
+            <%= Number(item.category_id) === category.id ? "selected" : "" %>
+          >
+            <%= category.name %>
+          </option>
+        <% }) %>
+      </select>
+      <% if (errorsByField.category_id) { %><small class="field-error"><%= errorsByField.category_id %></small><% } %>
+    </label>
+
+    <label class="field">
+      <span>Staff owner</span>
+      <select
+        class="<%= errorsByField.user_id ? 'input-error' : '' %>"
+        name="user_id"
+        required
+      >
+        <option value="">Select a staff owner</option>
+        <% users.forEach((user) => { %>
+          <option
+            value="<%= user.id %>"
+            <%= Number(item.user_id) === user.id ? "selected" : "" %>
+          >
+            <%= user.username %>
+          </option>
+        <% }) %>
+      </select>
+      <% if (errorsByField.user_id) { %><small class="field-error"><%= errorsByField.user_id %></small><% } %>
+    </label>
+  </div>
+
+  <div class="inline-actions">
+    <button class="button button-primary" type="submit"><%= submitLabel %></button>
+    <a class="button" href="/items">Cancel</a>
+  </div>
+</form>
+
+<%- include("../partials/footer") %>

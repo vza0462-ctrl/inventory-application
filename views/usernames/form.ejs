@@ -1,0 +1,32 @@
+<%- include("../partials/head") %>
+
+<section class="section-heading">
+  <div>
+    <p class="eyebrow">Staff owner form</p>
+    <h1><%= title %></h1>
+  </div>
+</section>
+
+<%- include("../partials/messages") %>
+
+<form class="panel form-stack" action="<%= actionPath %>" method="post">
+  <label class="field">
+    <span>Username</span>
+    <input
+      class="<%= errorsByField.username ? 'input-error' : '' %>"
+      name="username"
+      type="text"
+      value="<%= user.username %>"
+      maxlength="255"
+      required
+    >
+    <% if (errorsByField.username) { %><small class="field-error"><%= errorsByField.username %></small><% } %>
+  </label>
+
+  <div class="inline-actions">
+    <button class="button button-primary" type="submit"><%= submitLabel %></button>
+    <a class="button" href="/staff">Cancel</a>
+  </div>
+</form>
+
+<%- include("../partials/footer") %>

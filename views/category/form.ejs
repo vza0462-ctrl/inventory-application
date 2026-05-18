@@ -1,0 +1,44 @@
+<%- include("../partials/head") %>
+
+<section class="section-heading">
+  <div>
+    <p class="eyebrow">Category form</p>
+    <h1><%= title %></h1>
+  </div>
+</section>
+
+<%- include("../partials/messages") %>
+
+<form class="panel form-stack" action="<%= actionPath %>" method="post">
+  <label class="field">
+    <span>Name</span>
+    <input
+      class="<%= errorsByField.name ? 'input-error' : '' %>"
+      name="name"
+      type="text"
+      value="<%= category.name %>"
+      maxlength="100"
+      required
+    >
+    <% if (errorsByField.name) { %><small class="field-error"><%= errorsByField.name %></small><% } %>
+  </label>
+
+  <label class="field">
+    <span>Description</span>
+    <textarea
+      class="<%= errorsByField.description ? 'input-error' : '' %>"
+      name="description"
+      rows="5"
+      maxlength="500"
+      required
+    ><%= category.description %></textarea>
+    <% if (errorsByField.description) { %><small class="field-error"><%= errorsByField.description %></small><% } %>
+  </label>
+
+  <div class="inline-actions">
+    <button class="button button-primary" type="submit"><%= submitLabel %></button>
+    <a class="button" href="/categories">Cancel</a>
+  </div>
+</form>
+
+<%- include("../partials/footer") %>

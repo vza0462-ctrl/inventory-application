@@ -1,0 +1,78 @@
+<%- include("partials/head") %>
+
+<section class="hero">
+  <div>
+    <p class="eyebrow">Inventory management</p>
+    <h1>Keep stock organized without losing the store context.</h1>
+    <p class="lede">
+      Track categories, product records, and the staff owner responsible for each item.
+      Categories and staff cannot be deleted while items still depend on them.
+    </p>
+  </div>
+  <div class="hero-actions">
+    <a class="button button-primary" href="/items/new">Add new item</a>
+    <a class="button" href="/categories/new">Add category</a>
+    <a class="button" href="/staff/new">Add staff owner</a>
+  </div>
+</section>
+
+<section class="grid grid-four">
+  <article class="stat-card">
+    <span>Categories</span>
+    <strong><%= summary.category_count %></strong>
+  </article>
+  <article class="stat-card">
+    <span>Items</span>
+    <strong><%= summary.item_count %></strong>
+  </article>
+  <article class="stat-card">
+    <span>Units in stock</span>
+    <strong><%= summary.stock_units %></strong>
+  </article>
+  <article class="stat-card">
+    <span>Inventory value</span>
+    <strong><%= formatCurrency(summary.inventory_value) %></strong>
+  </article>
+</section>
+
+<section class="panel">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Recent records</p>
+      <h2>Latest items</h2>
+    </div>
+    <a class="text-link" href="/items">View all items</a>
+  </div>
+
+  <% if (recentItems.length === 0) { %>
+    <p class="empty-state">No items yet. Seed the database or create the first inventory item.</p>
+  <% } else { %>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>SKU</th>
+            <th>Category</th>
+            <th>Owner</th>
+            <th>Qty</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% recentItems.forEach((item) => { %>
+            <tr>
+              <td><a href="/items/<%= item.id %>"><%= item.itemname %></a></td>
+              <td><%= item.sku %></td>
+              <td><%= item.category_name %></td>
+              <td><%= item.username %></td>
+              <td><%= item.quantity %></td>
+              <td><%= formatCurrency(item.price) %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</section>
+<%- include("partials/footer") %>

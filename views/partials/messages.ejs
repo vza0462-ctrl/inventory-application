@@ -1,0 +1,10 @@
+<% if (errorList && errorList.length > 0) { %>
+  <div class="alert alert-error">
+    <h2>Please fix the following</h2>
+    <ul class="plain-list">
+      <% errorList.forEach((error) => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  </div>
+<% } %>

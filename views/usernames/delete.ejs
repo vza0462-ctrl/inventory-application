@@ -1,0 +1,48 @@
+<%- include("../partials/head") %>
+
+<section class="section-heading">
+  <div>
+    <p class="eyebrow">Delete staff owner</p>
+    <h1><%= user.username %></h1>
+  </div>
+</section>
+
+<section class="panel form-stack">
+  <% if (!canDelete) { %>
+    <div class="alert alert-warning">
+      <h2>Delete blocked</h2>
+      <p>This staff owner still has <%= items.length %> assigned item(s). Reassign or delete those items first.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Category</th>
+            <th>Qty</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% items.forEach((item) => { %>
+            <tr>
+              <td><a href="/items/<%= item.id %>"><%= item.itemname %></a></td>
+              <td><%= item.category_name %></td>
+              <td><%= item.quantity %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } else { %>
+    <p>This staff owner has no assigned items. Deleting it is safe.</p>
+    <form action="/staff/<%= user.id %>/delete" method="post">
+      <div class="inline-actions">
+        <button class="button button-danger" type="submit">Delete staff owner</button>
+        <a class="button" href="/staff/<%= user.id %>">Cancel</a>
+      </div>
+    </form>
+  <% } %>
+</section>
+
+<%- include("../partials/footer") %>

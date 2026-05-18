@@ -1,0 +1,50 @@
+<%- include("../partials/head") %>
+
+<section class="section-heading">
+  <div>
+    <p class="eyebrow">Delete category</p>
+    <h1><%= category.name %></h1>
+  </div>
+</section>
+
+<section class="panel form-stack">
+  <p><%= category.description %></p>
+
+  <% if (!canDelete) { %>
+    <div class="alert alert-warning">
+      <h2>Delete blocked</h2>
+      <p>This category still has <%= items.length %> item(s). Move or delete those items first.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>SKU</th>
+            <th>Qty</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% items.forEach((item) => { %>
+            <tr>
+              <td><a href="/items/<%= item.id %>"><%= item.itemname %></a></td>
+              <td><%= item.sku %></td>
+              <td><%= item.quantity %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } else { %>
+    <p>This category has no assigned items. Deleting it is safe.</p>
+    <form action="/categories/<%= category.id %>/delete" method="post">
+      <div class="inline-actions">
+        <button class="button button-danger" type="submit">Delete category</button>
+        <a class="button" href="/categories/<%= category.id %>">Cancel</a>
+      </div>
+    </form>
+  <% } %>
+</section>
+
+<%- include("../partials/footer") %>

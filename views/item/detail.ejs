@@ -1,0 +1,53 @@
+<%- include("../partials/head") %>
+
+<section class="section-heading">
+  <div>
+    <p class="eyebrow">Item detail</p>
+    <h1><%= item.itemname %></h1>
+    <p class="lede"><%= item.description %></p>
+  </div>
+  <div class="inline-actions">
+    <a class="button" href="/items/<%= item.id %>/edit">Edit</a>
+    <a class="button button-danger" href="/items/<%= item.id %>/delete">Delete</a>
+  </div>
+</section>
+
+<section class="detail-grid">
+  <article class="panel">
+    <h2>Stock info</h2>
+    <dl class="meta-list">
+      <div>
+        <dt>SKU</dt>
+        <dd><%= item.sku %></dd>
+      </div>
+      <div>
+        <dt>Quantity</dt>
+        <dd><%= item.quantity %></dd>
+      </div>
+      <div>
+        <dt>Price</dt>
+        <dd><%= formatCurrency(item.price) %></dd>
+      </div>
+      <div>
+        <dt>Created</dt>
+        <dd><%= formatDate(item.create_at) %></dd>
+      </div>
+    </dl>
+  </article>
+
+  <article class="panel">
+    <h2>Relations</h2>
+    <dl class="meta-list">
+      <div>
+        <dt>Category</dt>
+        <dd><a href="/categories/<%= item.category_id %>"><%= item.category_name %></a></dd>
+      </div>
+      <div>
+        <dt>Staff owner</dt>
+        <dd><a href="/staff/<%= item.user_id %>"><%= item.username %></a></dd>
+      </div>
+    </dl>
+  </article>
+</section>
+
+<%- include("../partials/footer") %>

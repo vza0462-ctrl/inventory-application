@@ -1,0 +1,59 @@
+<%- include("../partials/head") %>
+
+<section class="section-heading">
+  <div>
+    <p class="eyebrow">Browse</p>
+    <h1>Items</h1>
+  </div>
+  <a class="button button-primary" href="/items/new">New item</a>
+</section>
+
+<section class="panel form-inline">
+  <form class="search-form" action="/items" method="get">
+    <label class="field field-inline">
+      <span>Search inventory</span>
+      <input name="q" type="search" value="<%= search %>" placeholder="Name, SKU, category, owner">
+    </label>
+    <div class="inline-actions">
+      <button class="button button-primary" type="submit">Search</button>
+      <% if (search) { %>
+        <a class="button" href="/items">Clear</a>
+      <% } %>
+    </div>
+  </form>
+</section>
+
+<section class="panel">
+  <% if (items.length === 0) { %>
+    <p class="empty-state">No items matched this filter.</p>
+  <% } else { %>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>SKU</th>
+            <th>Category</th>
+            <th>Owner</th>
+            <th>Qty</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% items.forEach((item) => { %>
+            <tr>
+              <td><a href="/items/<%= item.id %>"><%= item.itemname %></a></td>
+              <td><%= item.sku %></td>
+              <td><a href="/categories/<%= item.category_id %>"><%= item.category_name %></a></td>
+              <td><a href="/staff/<%= item.user_id %>"><%= item.username %></a></td>
+              <td><%= item.quantity %></td>
+              <td><%= formatCurrency(item.price) %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</section>
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,17 @@
+<%- include("partials/head") %>
+
+<section class="panel form-stack">
+  <p class="eyebrow">Request failed</p>
+  <h1><%= error.status %> error</h1>
+  <p><%= error.message %></p>
+
+  <% if (error.stack) { %>
+    <pre class="stack-trace"><%= error.stack %></pre>
+  <% } %>
+
+  <div class="inline-actions">
+    <a class="button button-primary" href="/">Back to dashboard</a>
+  </div>
+</section>
+
+<%- include("partials/footer") %>
